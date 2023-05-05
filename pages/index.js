@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Uppy from '@uppy/core'
 import XHRUpload from '@uppy/xhr-upload'
 import { Dashboard } from '@uppy/react'
@@ -20,6 +19,9 @@ uppy.on('complete', (result) => {
 export default function Home() {
   return (
     <div>
+      <h1>
+        Put here the pdf file you want to summarize
+      </h1>
       <Dashboard
         proudlyDisplayPoweredByUppy={false}
 				uppy={uppy}
