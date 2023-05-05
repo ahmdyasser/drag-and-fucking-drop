@@ -14,7 +14,7 @@ const uppy = new Uppy({
 	});
 
 uppy.on('complete', (result) => {
-	console.log('Upload complete! Weve uploaded these files: ', result.successfful)
+	console.log('Upload complete! Weve uploaded these files: ', result.successful)
 })
 
 export default function Home() {
