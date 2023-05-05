@@ -18,9 +18,9 @@ uppy.on('complete', (result) => {
 
 export default function Home() {
   return (
-    <div>
-      <h1>
-        Put here the pdf file you want to summarize
+    <div className='container'>
+      <h1 className='heading'>
+        Put here the pdf file you want to summarize.
       </h1>
       <Dashboard
         proudlyDisplayPoweredByUppy={false}
