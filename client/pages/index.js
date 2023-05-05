@@ -10,7 +10,9 @@ const uppy = new Uppy({
 
 })
 	.use(XHRUpload, {
-		endpoint: 'https://api2.transloadit.com'
+		endpoint: 'http://localhost:8000/file',
+    fieldName: 'pdfFile',
+    formData: true
 	});
 
 uppy.on('complete', (result) => {
