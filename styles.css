@@ -28,3 +28,7 @@ span {
 .appName {
     padding-bottom: 100px;
 }
+
+.reactLoading {
+    margin: 0 auto; 
+}
