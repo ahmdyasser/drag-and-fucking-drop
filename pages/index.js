@@ -7,6 +7,7 @@ import '@uppy/dashboard/dist/style.css'
 import { useState } from 'react';
 import ReactLoading from 'react-loading';
 
+var isFileUploaded = false;
 const uppy = new Uppy({
   allowMultipleUploads: false,
 })
@@ -25,6 +26,7 @@ function Summarization() {
     }, 2000);
     setIsLoading(true);
     console.log('Upload complete! Weve uploaded these files: ', result.successfful);
+    isFileUploaded = true;
   })
     
   async function fetchStatus() {
@@ -55,20 +57,23 @@ function Summarization() {
       
     } 
    
-    if (isLoading) {
+    if (isLoading && isFileUploaded) {
       return (
         <>
           <ReactLoading className = "reactLoading" color={"black"} height={50} width={100} />
         </>
       )
+    } else if (!isFileUploaded && !isLoading) {
+      return <div></div>
+   } else {
+      return(
+        <>
+          <p>
+            here we get the summarized text
+          </p>
+        </>
+      )
     }
-    return(
-      <>
-        <p>
-          here we get the summarized text
-        </p>
-      </>
-    )
   }
 
 
