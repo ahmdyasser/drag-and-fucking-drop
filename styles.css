@@ -32,3 +32,8 @@ span {
 .reactLoading {
     margin: 0 auto; 
 }
+
+.flexbox-container {
+    display: flex;
+    flex-direction: row;
+}

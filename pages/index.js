@@ -6,6 +6,7 @@ import '@uppy/core/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 import { useState } from 'react';
 import ReactLoading from 'react-loading';
+import QuestionAndAnswer from './QuestionAndAnswer';
 
 var isFileUploaded = false;
 const uppy = new Uppy({
@@ -86,24 +87,27 @@ function Summarization() {
 export default function Home() {
 
   return (
-    <div className='container'>
-      <span className='appName'>
-        <Image
-          src="/enabled-logo.svg"
-          width={300}
-          height={100}
-          alt="enabled logo"
+    <div className='flexbox-containter'>
+      <div className='container'>
+        <span className='appName'>
+          <Image
+            src="/enabled-logo.svg"
+            width={300}
+            height={100}
+            alt="enabled logo"
+          />
+          <h4 className='subAppName'>Summarization app</h4>
+        </span>
+        <h3 className='heading'>
+          Put here the pdf file you want to summarize.
+        </h3>
+        <Dashboard
+          proudlyDisplayPoweredByUppy={false}
+          uppy={uppy}
         />
-        <h4 className='subAppName'>Summarization app</h4>
-      </span>
-      <h3 className='heading'>
-        Put here the pdf file you want to summarize.
-      </h3>
-      <Dashboard
-        proudlyDisplayPoweredByUppy={false}
-        uppy={uppy}
-      />
-      <Summarization />
+        <Summarization />
+      </div>
+      <QuestionAndAnswer />
     </div>
   )
 }
