@@ -19,7 +19,7 @@ function QuestionAndAnswer() {
     return (
       <div>
         <input type="text" value={inputText} onChange={handleInputChange} />
-        <button onClick={handleButtonClick}>Send</button>
+        <button class='rounded-full bg-cyan-600 p-2 text-white' onClick={handleButtonClick}>Send</button>
         <div>{responseText}</div>
       </div>
     );

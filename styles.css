@@ -1,39 +1,4 @@
-.container {
-    font-family: Arial;
-    font-size: 24px;
-    margin: auto;
-    width: 800px;
-    height: 1000px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.heading {
-    text-align: left;
-    font-family: Arial;
-    font-weight: bold;
-    font-size: 24px; 
-}
-
-span {
-    align-items: center;
-    display:flex; flex-direction:row;
-}
-
-.subAppName {
-    font-family: Helvetica;
-    font-weight: bold;
-    padding-left: 20px;
-    font-size: 24px; 
-}
-
-.appName {
-    padding-bottom: 100px;
-}
-
-.reactLoading {
-    margin: 0 auto; 
-}
-
-.flexbox-container {
-    display: flex;
-    flex-direction: row;
-}

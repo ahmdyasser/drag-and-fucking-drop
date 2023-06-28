@@ -6,7 +6,7 @@ import '@uppy/core/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 import { useState } from 'react';
 import ReactLoading from 'react-loading';
-import QuestionAndAnswer from './QuestionAndAnswer';
+import QuestionAndAnswer from '../components/QuestionAndAnswer';
 
 var isFileUploaded = false;
 const uppy = new Uppy({
@@ -87,7 +87,7 @@ function Summarization() {
 export default function Home() {
 
   return (
-    <div className='flexbox-containter'>
+    <div class='px-10 py-10 flex items-start'>
       <div className='container'>
         <span className='appName'>
           <Image
@@ -98,7 +98,7 @@ export default function Home() {
           />
           <h4 className='subAppName'>Summarization app</h4>
         </span>
-        <h3 className='heading'>
+        <h3 class='font-sans text-xl font-bold'>
           Put here the pdf file you want to summarize.
         </h3>
         <Dashboard
