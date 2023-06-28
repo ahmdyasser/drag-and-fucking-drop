@@ -8,12 +8,13 @@ function QuestionAndAnswer() {
     setInputText(event.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     console.log(inputText)
-    fetch(`[BASE_URL]/get_answer/${inputText}`)
+    await fetch(`http://127.0.0.1:8000/summarization/get_answer/${inputText}`)
       .then((response) => response.json())
       .then((data) => {
-        setResponseText(data);
+        setResponseText(data.answer);
+        // TODO: Dispaly the URLs returned in data.sources
       })
   };
 
