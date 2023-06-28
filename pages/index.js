@@ -13,12 +13,12 @@ const uppy = new Uppy({
   allowMultipleUploads: false,
 })
   .use(XHRUpload, {
-    endpoint: 'https://api2.transloadit.com' // TODO: Update to our upload endpoint
+    endpoint: 'http://127.0.0.1:8000/summarization/upload_file' // TODO: Update to our upload endpoint
   });
 
 function Summarization() {
   const [isLoading, setIsLoading] = useState(false);
-  var summarizedTextArray;
+  const [summarizedTextArray, setSummarizedTextArray] = useState([]);
   uppy.on('complete', (result) => {
     console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
@@ -27,15 +27,15 @@ function Summarization() {
   })
 
   async function getSummarization() {
-    let url = "[BASE_URL]/summarize";
+    let url = "http://127.0.0.1:8000/summarization/summarize";
     let response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
-    const jsonResponse = await response.json()
-    summarizedTextArray = jsonResponse["summary"];
+    const jsonResponse = await response.json();
+    setSummarizedTextArray(jsonResponse.summary);
   }
 
   if (isLoading && isFileUploaded) {
@@ -52,7 +52,7 @@ function Summarization() {
         <ul>
           {summarizedTextArray.map((item, index) => (
             <li key={index}>
-              <span>{item}</span>
+              <span>- {item}</span>
             </li>
           ))}
         </ul>
