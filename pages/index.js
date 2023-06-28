@@ -24,12 +24,25 @@ function Summarization() {
       if (await fetchStatus()) {
         clearInterval(timerId);
         setIsLoading(false);
+        getSummarization();
       }
     }, 2000); // This repeates calling the function every 2 seconds 
     setIsLoading(true);
     console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
   })
+
+  async function getSummarization() {
+    let url = "[BASE_URL]/summarize";
+    let response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    const jsonResponse = await response.json()
+    summarizedTextArray = jsonResponse["summary"];
+  }
 
   async function fetchStatus() {
     var isSummarized = false;
@@ -44,20 +57,7 @@ function Summarization() {
     const jsonResponse = await response.json()
     isSummarized = jsonResponse["summary_status"]; // returns true or false
     console.log(jsonResponse);
-    if (isSummarized) {
-      let url = "[BASE_URL]/summarize";
-      let response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-      const jsonResponse = await response.json()
-      summarizedTextArray = jsonResponse["summary"];
-      return true
-    } else {
-      return false
-    }
+    isSummarized ? true : false
   }
 
   if (isLoading && isFileUploaded) {
