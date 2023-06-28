@@ -19,10 +19,10 @@ const uppy = new Uppy({
 function Summarization() {
   const [isLoading, setIsLoading] = useState(false);
   const [summarizedTextArray, setSummarizedTextArray] = useState([]);
-  uppy.on('complete', (result) => {
+  uppy.on('complete', async (result) => {
     console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
-    getSummarization();
+    await getSummarization();
     setIsLoading(false);
   })
 
