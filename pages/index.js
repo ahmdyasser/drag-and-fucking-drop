@@ -20,16 +20,10 @@ function Summarization() {
   const [isLoading, setIsLoading] = useState(false);
   var summarizedTextArray;
   uppy.on('complete', (result) => {
-    let timerId = setInterval(async function () {
-      if (await fetchStatus()) {
-        clearInterval(timerId);
-        setIsLoading(false);
-        getSummarization();
-      }
-    }, 2000); // This repeates calling the function every 2 seconds 
-    setIsLoading(true);
     console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
+    getSummarization();
+    setIsLoading(false);
   })
 
   async function getSummarization() {
@@ -42,22 +36,6 @@ function Summarization() {
     })
     const jsonResponse = await response.json()
     summarizedTextArray = jsonResponse["summary"];
-  }
-
-  async function fetchStatus() {
-    var isSummarized = false;
-    let url = "[BASE_URL/summary_status]" // TODO: Update to our endpoint which checks the status
-    let response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-
-    const jsonResponse = await response.json()
-    isSummarized = jsonResponse["summary_status"]; // returns true or false
-    console.log(jsonResponse);
-    isSummarized ? true : false
   }
 
   if (isLoading && isFileUploaded) {
@@ -87,7 +65,7 @@ function Summarization() {
 export default function Home() {
 
   return (
-    <div class='px-10 py-10 flex items-start'>
+    <div className='px-10 py-10 flex items-start'>
       <div className='container'>
         <span className='appName'>
           <Image
@@ -98,7 +76,7 @@ export default function Home() {
           />
           <h4 className='subAppName'>Summarization app</h4>
         </span>
-        <h3 class='font-sans text-xl font-bold'>
+        <h3 className='font-sans text-xl font-bold'>
           Put here the pdf file you want to summarize.
         </h3>
         <Dashboard
