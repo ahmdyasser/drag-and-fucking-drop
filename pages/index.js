@@ -12,49 +12,51 @@ const uppy = new Uppy({
   allowMultipleUploads: false,
 })
   .use(XHRUpload, {
-    endpoint: 'https://api2.transloadit.com'
+    endpoint: 'https://api2.transloadit.com' // TODO: Update to our upload endpoint
   });
 
 function Summarization() {
   const [isLoading, setIsLoading] = useState(false);
+  var summarizedTextArray;
   uppy.on('complete', (result) => {
     let timerId = setInterval(async function () {
       if (await fetchStatus()) {
         clearInterval(timerId);
         setIsLoading(false);
       }
-    }, 2000);
+    }, 2000); // This repeates calling the function every 2 seconds 
     setIsLoading(true);
-    console.log('Upload complete! Weve uploaded these files: ', result.successfful);
+    console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
   })
 
   async function fetchStatus() {
-    var time;
-    let response = await fetch("https://reqres.in/api/users", {
-      method: "POST",
-      body: JSON.stringify({
-        name: "morpheus",
-        job: "leader"
-      }),
+    var isSummarized = false;
+    let url = "[BASE_URL/summary_status]" // TODO: Update to our endpoint which checks the status
+    let response = await fetch(url, {
+      method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
 
     const jsonResponse = await response.json()
-    time = jsonResponse["createdAt"];
-    const minutes = time.split('T')[1].split(':')[1]
+    isSummarized = jsonResponse["summary_status"]; // returns true or false
     console.log(jsonResponse);
-    console.log(minutes);
-
-    console.log(time);
-    if (minutes == 29) {
+    if (isSummarized) {
+      let url = "[BASE_URL]/summarize";
+      let response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      const jsonResponse = await response.json()
+      summarizedTextArray = jsonResponse["summary"];
       return true
     } else {
       return false
     }
-
   }
 
   if (isLoading && isFileUploaded) {
@@ -68,9 +70,13 @@ function Summarization() {
   } else {
     return (
       <>
-        <p>
-          here we get the summarized text
-        </p>
+        <ul>
+          {summarizedTextArray.map((item, index) => (
+            <li key={index}>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </>
     )
   }
