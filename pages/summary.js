@@ -26,6 +26,29 @@ export default function SummaryPage() {
     const jsonResponse = await response.json();
     setSummarizedTextArray(jsonResponse.summary);
     setIsLoading(false);
+
+    // Request the file after getting the summary
+    await getFile();
+  }
+
+  async function getFile() {
+    let url = "http://127.0.0.1:8000/summarization/get_file";
+    let response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.width = "50%";
+      iframe.height = "500px";
+      document.body.appendChild(iframe);
+    }
   }
 
   return (
