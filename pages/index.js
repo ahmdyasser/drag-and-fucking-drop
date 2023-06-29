@@ -22,6 +22,7 @@ function Summarization() {
   uppy.on('complete', async (result) => {
     console.log('Upload complete! Weve uploaded these files: ', result.successful);
     isFileUploaded = true;
+    setIsLoading(true);
     await getSummarization();
     setIsLoading(false);
   })
