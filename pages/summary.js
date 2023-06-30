@@ -6,6 +6,7 @@ export default function SummaryPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [summarizedTextArray, setSummarizedTextArray] = useState([]);
   const hasRequestedSummaryRef = useRef(false);
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     if (!hasRequestedSummaryRef.current) {
@@ -13,6 +14,13 @@ export default function SummaryPage() {
       setIsLoading(true);
       getSummarization();
     }
+
+    return () => {
+      // Cleanup function: remove the iframe when unmounting the component
+      if (iframeRef.current) {
+        document.body.removeChild(iframeRef.current);
+      }
+    };
   }, []);
 
   async function getSummarization() {
@@ -48,6 +56,7 @@ export default function SummaryPage() {
       iframe.width = "50%";
       iframe.height = "500px";
       document.body.appendChild(iframe);
+      iframeRef.current = iframe;
     }
   }
 
