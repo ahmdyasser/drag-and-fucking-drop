@@ -7,18 +7,17 @@ import "@uppy/dashboard/dist/style.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-
 var isFileUploaded = false;
-const uppy = new Uppy({
-  allowMultipleUploads: false,
-}).use(XHRUpload, {
-  endpoint: "http://127.0.0.1:8000/summarization/upload_file", // TODO: Update to our upload endpoint
-});
 
-function UploadFilePage() {
+function Home() {
   const router = useRouter();
 
-  
+  isFileUploaded = false;
+  const uppy = new Uppy({
+    allowMultipleUploads: false,
+  }).use(XHRUpload, {
+    endpoint: "http://127.0.0.1:8000/summarization/upload_file", // TODO: Update to our upload endpoint
+  });
   useEffect(() => {
     uppy.on("complete", handleUploadComplete);
   }, []);
@@ -56,4 +55,4 @@ function UploadFilePage() {
   );
 }
 
-export default UploadFilePage;
+export default Home;
