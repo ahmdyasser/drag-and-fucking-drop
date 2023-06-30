@@ -12,6 +12,7 @@ export default function SummaryPage() {
     if (!hasRequestedSummaryRef.current) {
       hasRequestedSummaryRef.current = true;
       setIsLoading(true);
+      getFile();
       getSummarization();
     }
 
@@ -34,9 +35,6 @@ export default function SummaryPage() {
     const jsonResponse = await response.json();
     setSummarizedTextArray(jsonResponse.summary);
     setIsLoading(false);
-
-    // Request the file after getting the summary
-    await getFile();
   }
 
   async function getFile() {
