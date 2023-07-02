@@ -24,13 +24,15 @@ function QuestionAndAnswer() {
   };
 
   return (
-    <div>
-      <input className='border-black border-md border-2' type="text" value={inputText} onChange={handleInputChange} />
-      <button className='rounded-md bg-black p-2 text-white' onClick={handleButtonClick}>
-        Send
-      </button>
+    <div className='flex flex-col items-center'>
+      <div className='flex flex-row items-center'>
+        <input className='border-black border-md h-10 border-2' type="text" value={inputText} onChange={handleInputChange} />
+        <button className='rounded-md bg-black p-2 text-white' onClick={handleButtonClick}>
+          Send
+        </button>
+      </div>
       {isLoading ? (
-        <ReactLoading className='reactLoading' color={'black'} height={50} width={100} />
+        <ReactLoading className='reactLoading' color={'black'} />
       ) : (
         <div>{responseText}</div>
       )}

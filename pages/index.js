@@ -35,23 +35,19 @@ function Home() {
   }
 
   return (
-    <div className="px-10 py-10 flex items-start">
-      <div className="container">
-        <span className="appName">
+      <div className="flex flex-col items-center bg-indigo-500 py-10">
           <Image
             src="/enabled-logo.svg"
             width={300}
             height={100}
             alt="enabled logo"
           />
-          <h4 className="subAppName">Summarization app</h4>
-        </span>
-        <h3 className="font-sans text-xl font-bold">
+          <p className="text-2xl font-sans font-bold  pb-20 pt-5">Summarization app</p>
+        <p className="font-sans text-xl">
           Put here the PDF file you want to summarize.
-        </h3>
+        </p>
         <Dashboard proudlyDisplayPoweredByUppy={false} uppy={uppy} />
       </div>
-    </div>
   );
 }
 

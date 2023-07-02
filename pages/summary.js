@@ -26,12 +26,7 @@ export default function SummaryPage() {
 
   async function getSummarization() {
     let url = "http://127.0.0.1:8000/summarization/summarize";
-    let response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    let response = await fetch(url);
     const jsonResponse = await response.json();
     setSummarizedTextArray(jsonResponse.summary);
     setIsLoading(false);
@@ -39,13 +34,7 @@ export default function SummaryPage() {
 
   async function getFile() {
     let url = "http://127.0.0.1:8000/summarization/get_file";
-    let response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-
+    let response = await fetch(url);
     if (response.ok) {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
@@ -59,27 +48,24 @@ export default function SummaryPage() {
   }
 
   return (
-    <div className="px-10 py-10 flex items-start">
-      <div className="container">
-        <ul>
-          {summarizedTextArray.map((item, index) => (
-            <li key={index}>
-              <span>- {item}</span>
-            </li>
-          ))}
-        </ul>
-        {isLoading ? (
-          <div>
-            <ReactLoading
-              className="reactLoading"
-              color={"black"}
-              height={50}
-              width={100}
-            />
-            <p>Generating summary...</p>
-          </div>
-        ) : null}
-      </div>
+    <div className='flex flex-col items-center py-10 px-30 bg-indigo-500'>
+      <ul className='px-30'>
+        {summarizedTextArray.map((item, index) => (
+          <li key={index}>
+            <span>- {item}</span>
+          </li>
+        ))}
+      </ul>
+      {isLoading ? (
+        <div className='flex flex-col items-center'>
+          <p className='text-l font-sans font-bold'
+          >Generating summary...</p>
+          <ReactLoading
+            className="reactLoading"
+            color={"black"}
+          />
+        </div>
+      ) : null}
       <QuestionAndAnswer />
     </div>
   );
