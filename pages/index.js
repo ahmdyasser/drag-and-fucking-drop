@@ -6,13 +6,13 @@ import "@uppy/core/dist/style.css";
 import "@uppy/dashboard/dist/style.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 var isFileUploaded = false;
 
 function Home() {
   const router = useRouter();
-
-  isFileUploaded = false;
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
   const uppy = new Uppy({
     allowMultipleUploads: false,
   }).use(XHRUpload, {
@@ -28,7 +28,7 @@ function Home() {
       result.successful
     );
     if (!isFileUploaded) {
-      isFileUploaded = true;
+      setIsFileUploaded(true);
       // Redirect to SummaryPage
       router.push("/summary");
     }
